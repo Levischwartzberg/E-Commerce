@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
+    const data = await Category.findByPk(req.params.id);
     const categoryData = await Category.update(req.body,
       {
         where: {
@@ -63,7 +64,7 @@ router.put('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(categoryData);
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -72,6 +73,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
+    const data = await Category.findByPk(req.params.id);
     const categoryData = await Category.destroy({
       where: {
         id: req.params.id,
@@ -83,7 +85,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(categoryData);
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json(err);
   }
